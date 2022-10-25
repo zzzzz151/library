@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+{% if error %}
+    <p style="color: red">ERROR: Insert a query term.</p>
+{% endif %}
+
+<form action="." method="post">
+    {% csrf_token %}
+    <b>Add book</b>
+    <br />
+    <label for="bookTitle">Title </label>
+    <input type="text" name="bookTitle" id="bookTitle">
+    <br />
+    <label for="authorsSelected">Authors </label>
+    <br />
+    <select name="authorsSelected" id="authorsSelected" multiple>
+        {% for author in authors %}
+            <option value="{{  author.name }}">{{ author.name }}</option>
+        {% endfor %}
+    </select>
+    <br />
+    <label for="publisherSelected">Publisher</label>
+    <br />
+    <select name="publisherSelected" id="publisherSelected">
+        {% for publ in publishers %}
+            <option value="{{  publ.name }}">{{ publ.name }}</option>
+        {% endfor %}
+    </select>
+    <br />
+    <br />
+    <input type="submit" value="Add">
+</form>
+<br/>
+
+{% endblock %}

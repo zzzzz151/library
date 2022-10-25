@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<p>Search authors by: <strong>{{ query }}</strong></p>
+{% if authors %}
+    <p>Found {{ authors | length }} author{{ authors | pluralize }}.</p>
+    <ul>
+        {% for aut in authors %}
+            <li>{{ aut }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>Not found any result.</p>
+{% endif %}
+{% endblock %}

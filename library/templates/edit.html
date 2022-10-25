@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+{% if error %}
+    <p style="color: red">ERROR: Insert a query term.</p>
+{% endif %}
+
+<form action="." method="post">
+    {% csrf_token %}
+    <b>Edit authors</b>
+    {% for author in authors %}
+        <br/>
+        <br/>
+        <p>Author.id={{ author.id }}</p>
+            {% with author.id|stringformat:"s"|add:author.name as varAuthorName %}
+                <label for="{{  varAuthorName }}">Name</label>
+                <input type="text" name="{{  varAuthorName }}" id="{{  varAuthorName }}" value="{{ author.name }}">
+            {% endwith %}
+            <br/>
+            {% with author.id|stringformat:"s"|add:author.email as varAuthorEmail %}
+                <label for={{ varAuthorEmail }}>Email</label>
+                <input type="text" name="{{ varAuthorEmail }}" id="{{ varAuthorEmail }}" value="{{ author.email }}">
+            {% endwith %}
+    {% endfor %}
+    <br/>
+    <br/>
+    <input type="submit" value="Submit changes">
+</form>
+<br/>
+
+{% endblock %}
